@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
+// Route::get('/', function () {
+//     return Inertia::render('Guest', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//     ]);
+// });
 Route::get('/', function () {
     return Inertia::render('Auth/Login');
 });
