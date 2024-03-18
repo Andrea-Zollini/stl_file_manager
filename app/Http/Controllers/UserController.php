@@ -11,4 +11,9 @@ class UserController extends Controller
     {
         return Inertia::render('Dashboard');
     }
+
+    public function create()
+    {
+        return Inertia::render('Create');
+    }
 }
