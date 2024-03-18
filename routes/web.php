@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -29,9 +30,9 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
-    Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
-    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy');
+    Route::get('/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::patch('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+    Route::delete('/admin/profile', [AdminProfileController::class, 'destroy'])->name('admin.profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
