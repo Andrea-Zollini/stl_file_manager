@@ -41,15 +41,6 @@ const submit = () => {
                     />
                 </div>
                 <div class="px-5 py-2">
-                    <label for="phone_number" class="block pb-2"
-                        >Numero di telefono</label
-                    >
-                    <input
-                        type="text"
-                        class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    />
-                </div>
-                <div class="px-5 py-2">
                     <label for="file" class="block pb-2">File</label>
                     <input type="file" accept=".stl" />
                 </div>
