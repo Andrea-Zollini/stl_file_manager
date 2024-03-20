@@ -1,19 +1,32 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 
 const props = defineProps({
     user: Object,
 });
 
-const submit = () => {
-    console.log("test");
+const form = useForm({
+    order_name: props.user.name,
+    order_last_name: props.user.last_name,
+    order_email: props.user.email,
+    order_phone_number: props.user.phone_number,
+    stl_file: null,
+});
+
+const handleFileUpload = (e) => {
+    e.preventDefault;
+    form.stl_file = e.target.files[0];
 };
 
-onMounted(() => {
-    console.log(props);
-});
+const submit = () => {
+    console.log(form);
+};
+
+// onMounted(() => {
+//     console.log(props);
+// });
 </script>
 
 <template>
@@ -33,7 +46,7 @@ onMounted(() => {
                     <input
                         id="name"
                         type="text"
-                        v-model="user.name"
+                        v-model="form.order_name"
                         class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                 </div>
@@ -42,7 +55,7 @@ onMounted(() => {
                     <input
                         id="last_name"
                         type="text"
-                        v-model="user.last_name"
+                        v-model="form.order_last_name"
                         class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                 </div>
@@ -51,7 +64,7 @@ onMounted(() => {
                     <input
                         id="email"
                         type="email"
-                        v-model="user.email"
+                        v-model="form.order_email"
                         class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                 </div>
@@ -62,13 +75,17 @@ onMounted(() => {
                     <input
                         id="phone_number"
                         type="text"
-                        v-model="user.phone_number"
+                        v-model="form.order_phone_number"
                         class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                 </div>
                 <div class="px-5 py-2">
                     <label for="file" class="block pb-2">File</label>
-                    <input type="file" accept=".stl" />
+                    <input
+                        type="file"
+                        accept=".stl"
+                        @change="handleFileUpload"
+                    />
                 </div>
 
                 <div class="px-5 py-2 mt-3">
