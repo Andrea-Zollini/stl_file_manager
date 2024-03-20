@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,6 +15,7 @@ class UserController extends Controller
 
     public function create()
     {
-        return Inertia::render('Create');
+        $loggedUser = Auth::user();
+        return Inertia::render('Create', ['user' => $loggedUser]);
     }
 }

@@ -1,10 +1,19 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
+import { onMounted } from "vue";
+
+const props = defineProps({
+    user: Object,
+});
 
 const submit = () => {
     console.log("test");
 };
+
+onMounted(() => {
+    console.log(props);
+});
 </script>
 
 <template>
@@ -22,21 +31,38 @@ const submit = () => {
                 <div class="px-5 py-2">
                     <label for="name" class="block pb-2">Nome</label>
                     <input
+                        id="name"
                         type="text"
+                        v-model="user.name"
                         class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                 </div>
                 <div class="px-5 py-2">
                     <label for="last_name" class="block pb-2">Cognome</label>
                     <input
+                        id="last_name"
                         type="text"
+                        v-model="user.last_name"
                         class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                 </div>
                 <div class="px-5 py-2">
                     <label for="email" class="block pb-2">Email</label>
                     <input
+                        id="email"
                         type="email"
+                        v-model="user.email"
+                        class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    />
+                </div>
+                <div class="px-5 py-2">
+                    <label for="phone_number" class="block pb-2"
+                        >Numero di telefono</label
+                    >
+                    <input
+                        id="phone_number"
+                        type="text"
+                        v-model="user.phone_number"
                         class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                 </div>
