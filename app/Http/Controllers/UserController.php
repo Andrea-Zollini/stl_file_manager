@@ -18,4 +18,15 @@ class UserController extends Controller
         $loggedUser = Auth::user();
         return Inertia::render('Create', ['user' => $loggedUser]);
     }
+
+    public function upload(Request $request)
+    {
+        // dd($request);
+        $loggedUser = Auth::user();
+        if ($request->hasFile('stl_file')) {
+            $file = $request->file('stl_file');
+            $file_name = $file->getClientOriginalName();
+            $file->storeAs('file_ordini/' . $loggedUser->id, $file_name, 's3');
+        }
+    }
 }

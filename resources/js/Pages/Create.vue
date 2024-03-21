@@ -21,7 +21,16 @@ const handleFileUpload = (e) => {
 };
 
 const submit = () => {
-    console.log(form);
+    form.post(route("ordina.upload"), {
+        onFinish: () =>
+            form.reset(
+                "order_email",
+                "order_last_name",
+                "order_name",
+                "order_phone_number",
+                "stl_file"
+            ),
+    });
 };
 
 // onMounted(() => {
