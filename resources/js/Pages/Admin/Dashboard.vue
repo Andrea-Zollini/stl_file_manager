@@ -1,5 +1,6 @@
 <script setup>
 import AdminAuthenticatedLayout from "@/Layouts/AdminAuthenticatedLayout.vue";
+import Button from "primevue/button";
 import { Head, useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 
@@ -22,10 +23,14 @@ onMounted(() => {
             </h2>
         </template>
 
-        <form @submit.prevent="submit" class="p-5">
+        <ul class="p-5">
             <li v-for="order in props.orders">
                 <a :href="order.file_url">{{ order.stl_file_path }}</a>
             </li>
-        </form>
+        </ul>
+
+        <div class="flex justify-center card">
+            <Button label="Submit" class="text-primary-950" />
+        </div>
     </AdminAuthenticatedLayout>
 </template>
