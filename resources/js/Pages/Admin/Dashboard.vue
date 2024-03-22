@@ -24,19 +24,25 @@ onMounted(() => {
                 style="border: 3px solid lightgray"
             >
                 <div class="flex mt-5 mb-5">
-                    <div class="flex items-center justify-center w-1/3">
+                    <div
+                        class="flex items-center justify-center w-1/3 font-bold"
+                    >
                         Utente
                     </div>
-                    <div class="flex items-center justify-center w-1/3">
+                    <div
+                        class="flex items-center justify-center w-1/3 font-bold"
+                    >
                         Id Ordine
                     </div>
-                    <div class="flex items-center justify-center w-1/3">
+                    <div
+                        class="flex items-center justify-center w-1/3 font-bold"
+                    >
                         File STL
                     </div>
                 </div>
                 <ul class="unstyled">
                     <li
-                        class="flex min-h-[120px] hover:bg-gray-200 transition-all ease-in-out duration-200"
+                        class="flex min-h-[100px] hover:bg-gray-200 transition-all ease-in-out duration-200"
                         v-for="order in props.orders.data"
                         style="border-top: 3px solid lightgray"
                     >
