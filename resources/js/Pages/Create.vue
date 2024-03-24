@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, useForm, Link } from "@inertiajs/vue3";
 import RenderArea from "../Components/Partials/RenderArea.vue";
 import { onMounted, ref, watch } from "vue";
 
@@ -8,6 +8,7 @@ const props = defineProps({
     user: Object,
 });
 
+const isUploaded = ref(false);
 const selectedFile = ref(null);
 const emit = defineEmits();
 
@@ -41,6 +42,9 @@ const submit = () => {
                 "order_phone_number",
                 "stl_file"
             ),
+        onSuccess: () => {
+            isUploaded.value = true;
+        },
     });
 };
 
@@ -59,7 +63,7 @@ const submit = () => {
             </h2>
         </template> -->
 
-        <div class="flex">
+        <div class="flex" v-if="!isUploaded">
             <div class="flex items-center justify-center w-1/3 calc-height">
                 <form @submit.prevent="submit">
                     <div class="px-5 py-2">
@@ -124,6 +128,24 @@ const submit = () => {
 
             <div class="flex items-center justify-center w-2/3 calc-height">
                 <RenderArea :file="selectedFile" />
+            </div>
+        </div>
+
+        <div
+            v-if="isUploaded"
+            class="flex flex-col items-center justify-center calc-height"
+        >
+            <div
+                class="relative px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded"
+                role="alert"
+                style="max-width: 50%"
+            >
+                <p class="block sm:inline">File caricato con successo.</p>
+            </div>
+            <div class="mt-5">
+                <Link class="hover:underline" :href="route('ordina')"
+                    >Crea un nuovo ordine</Link
+                >
             </div>
         </div>
     </AuthenticatedLayout>
