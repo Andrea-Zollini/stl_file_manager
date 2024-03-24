@@ -1,21 +1,29 @@
 <script setup>
 import * as THREE from "three";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 const el = ref(null);
 
-onMounted(() => {
-    const render = el.value;
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
+const props = defineProps({
+    file: Object,
+});
+
+let camera = null;
+let scene = null;
+let renderer = null;
+
+const displayFile = () => {
+    const renderArea = el.value;
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
     );
 
-    const renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer();
     renderer.setSize(1200, 800);
-    render.appendChild(renderer.domElement);
+    renderArea.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -34,6 +42,28 @@ onMounted(() => {
     }
 
     animate();
+};
+
+const destroyScene = () => {
+    if (renderer) {
+        renderer.domElement.remove();
+    }
+};
+
+onMounted(() => {
+    watch(
+        () => props.file,
+        (newValue, oldValue) => {
+            if (newValue !== oldValue) {
+                if (oldValue) {
+                    destroyScene();
+                }
+                if (newValue) {
+                    displayFile();
+                }
+            }
+        }
+    );
 });
 </script>
 

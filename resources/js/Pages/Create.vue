@@ -2,11 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import RenderArea from "../Components/Partials/RenderArea.vue";
-import { onMounted } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 const props = defineProps({
     user: Object,
 });
+
+const selectedFile = ref(null);
+const emit = defineEmits();
 
 const form = useForm({
     order_name: props.user.name,
@@ -19,7 +22,14 @@ const form = useForm({
 const handleFileUpload = (e) => {
     e.preventDefault;
     form.stl_file = e.target.files[0];
+    selectedFile.value = e.target.files[0];
 };
+
+watch(selectedFile, (newValue, oldValue) => {
+    if (newValue != oldValue) {
+        emit("file-selected", newValue);
+    }
+});
 
 const submit = () => {
     form.post(route("ordina.upload"), {
@@ -113,7 +123,7 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-center w-2/3 calc-height">
-                <RenderArea />
+                <RenderArea :file="selectedFile" />
             </div>
         </div>
     </AuthenticatedLayout>
