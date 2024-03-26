@@ -18,8 +18,9 @@ onMounted(() => {
     <Head title="Admin Dashboard" />
 
     <AdminAuthenticatedLayout>
-        <div class="flex items-center calc-height">
+        <div class="flex items-center justify-center calc-height">
             <div
+                v-if="props.orders.length"
                 class="rounded shadow md:container md:mx-auto"
                 style="border: 3px solid lightgray"
             >
@@ -61,6 +62,8 @@ onMounted(() => {
                     </li>
                 </ul>
             </div>
+
+            <div v-else>Nessun ordine</div>
         </div>
     </AdminAuthenticatedLayout>
 </template>
