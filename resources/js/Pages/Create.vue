@@ -126,7 +126,9 @@ const submit = () => {
                 </form>
             </div>
 
-            <div class="flex items-center justify-center w-2/3 calc-height">
+            <div
+                class="flex items-center justify-center w-2/3 overflow-hidden calc-height"
+            >
                 <RenderArea :file="selectedFile" />
             </div>
         </div>
