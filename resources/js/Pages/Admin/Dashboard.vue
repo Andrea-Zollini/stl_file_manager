@@ -9,6 +9,10 @@ const props = defineProps({
     },
 });
 
+const formatDate = (str) => {
+    return str.split("T")[0].replace("-", "/").replace("-", "/");
+};
+
 onMounted(() => {
     console.log(props.orders);
 });
@@ -20,7 +24,6 @@ onMounted(() => {
     <AdminAuthenticatedLayout>
         <div class="flex items-center justify-center calc-height">
             <div
-                v-if="props.orders.length"
                 class="rounded shadow md:container md:mx-auto"
                 style="border: 3px solid lightgray"
             >
@@ -34,6 +37,11 @@ onMounted(() => {
                         class="flex items-center justify-center w-1/3 font-bold"
                     >
                         Id Ordine
+                    </div>
+                    <div
+                        class="flex items-center justify-center w-1/3 font-bold"
+                    >
+                        Data Ordine
                     </div>
                     <div
                         class="flex items-center justify-center w-1/3 font-bold"
@@ -55,6 +63,9 @@ onMounted(() => {
                             {{ order.id }}
                         </div>
                         <div class="flex items-center justify-center w-1/3">
+                            {{ formatDate(order.created_at) }}
+                        </div>
+                        <div class="flex items-center justify-center w-1/3">
                             <a class="text-blue-700" :href="order.file_url">
                                 {{ order.stl_file_path }}
                             </a>
@@ -62,8 +73,6 @@ onMounted(() => {
                     </li>
                 </ul>
             </div>
-
-            <div v-else>Nessun ordine</div>
         </div>
     </AdminAuthenticatedLayout>
 </template>
