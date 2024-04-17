@@ -94,7 +94,9 @@ const loadSTL = (fileName) => {
     );
     let loader = new STLLoader();
     loader.load(fileURL, (model) => {
-        object = new THREE.Mesh(model, new THREE.MeshLambertMaterial(0x00ff00));
+        const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        object = new THREE.Mesh(model, material);
+        // object = new THREE.Mesh(model, new THREE.MeshLambertMaterial(0x00ff00));
         object.scale.set(0.15, 0.15, 0.15);
         object.position.set(0, 0, 0);
         init();

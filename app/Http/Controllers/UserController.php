@@ -11,29 +11,31 @@ class UserController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard');
+        $user = Auth::user();
+        $orders_by_user = $user->orders()->paginate(10);
+        return Inertia::render('Dashboard', ['orders' => $orders_by_user]);
     }
 
     public function create()
     {
-        $loggedUser = Auth::user();
-        return Inertia::render('Create', ['user' => $loggedUser]);
+        $user = Auth::user();
+        return Inertia::render('Create', ['user' => $user]);
     }
 
     public function upload(Request $request)
     {
         // dd($request);
-        $loggedUser = Auth::user();
+        $user = Auth::user();
         if ($request->hasFile('stl_file')) {
             $file = $request->file('stl_file');
             $file_name = $file->getClientOriginalName();
 
             Order::create([
                 'stl_file_path' => $file_name,
-                'user_id' => $loggedUser->id,
+                'user_id' => $user->id,
             ]);
 
-            $file->storeAs('file_ordini/' . $loggedUser->id, $file_name, 's3');
+            $file->storeAs('file_ordini/' . $user->id, $file_name, 's3');
         }
     }
 }
