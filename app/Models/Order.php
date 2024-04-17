@@ -11,6 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'stl_file_path',
+        'status',
         'user_id',
     ];
 
