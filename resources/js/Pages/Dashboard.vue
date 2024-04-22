@@ -22,7 +22,10 @@ onMounted(() => {
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <div class="flex items-center justify-center calc-height">
+        <div
+            v-if="props.orders.length"
+            class="flex items-center justify-center calc-height"
+        >
             <div
                 class="text-center rounded shadow md:container md:mx-auto"
                 style="border: 3px solid lightgray"
